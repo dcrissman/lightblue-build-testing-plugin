@@ -1,4 +1,4 @@
-package com.redhat.lightblue.plugin.maven;
+package com.redhat.lightblue.build.plugin.maven;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,9 +10,9 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import com.redhat.lightblue.build.plugin.MetadataPlugin;
 import com.redhat.lightblue.client.LightblueException;
 import com.redhat.lightblue.client.http.LightblueHttpClient;
-import com.redhat.lightblue.plugin.MetadataPlugin;
 
 @Mojo(name = "metadata", defaultPhase = LifecyclePhase.GENERATE_TEST_RESOURCES)
 public class MetadataPluginMojo extends AbstractMojo {

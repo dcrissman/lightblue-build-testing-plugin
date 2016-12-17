@@ -1,4 +1,4 @@
-package com.redhat.lightblue.plugin;
+package com.redhat.lightblue.build.plugin;
 
 import java.io.FileWriter;
 import java.io.IOException;

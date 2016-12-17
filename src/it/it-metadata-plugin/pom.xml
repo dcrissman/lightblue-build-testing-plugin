@@ -4,15 +4,24 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.redhat.lightblue.plugin.maven</groupId>
-  <artifactId>test-pom</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>it-metadata-plugin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
   <name>Test Metadata Plugin</name>
 
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
         <groupId>com.redhat.lightblue.plugin.maven</groupId>
-        <artifactId>lightblue-metadata-plugin</artifactId>
+        <artifactId>lightblue-build-plugin</artifactId>
         <configuration>
           <metadata>
             <user/>
