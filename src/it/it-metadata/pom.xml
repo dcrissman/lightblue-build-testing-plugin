@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.redhat.lightblue.plugin.maven</groupId>
-  <artifactId>it-lightblue-server-plugin</artifactId>
+  <artifactId>it-metadata-plugin</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Test Lightblue Server Plugin</name>
+  <name>Test Metadata Plugin</name>
 
   <build>
     <plugins>
@@ -18,17 +18,17 @@
           <target>1.8</target>
         </configuration>
       </plugin>
-    
+      
       <plugin>
         <groupId>com.redhat.lightblue.plugin.maven</groupId>
         <artifactId>lightblue-build-plugin</artifactId>
         <executions>
           <execution>
-            <goals><goal>server</goal></goals>
+            <goals><goal>metadata</goal></goals>
             <configuration>
-              <metadataPaths>
-                <metadataPath>metadata/user.json</metadataPath>
-              </metadataPaths>
+              <metadata>
+                <user/>
+              </metadata>
             </configuration>
           </execution>
         </executions>

@@ -14,6 +14,7 @@
 
   <properties>
     <lightblue-client.version>5.10.0-SNAPSHOT</lightblue-client.version>
+    <lightblue-rest.version>2.19.0-SNAPSHOT</lightblue-rest.version>
   </properties>
 
   <dependencies>
@@ -23,9 +24,9 @@
       <version>${lightblue-client.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.redhat.lightblue.client</groupId>
-      <artifactId>lightblue-client-integration-test</artifactId>
-      <version>${lightblue-client.version}</version>
+      <groupId>com.redhat.lightblue.rest</groupId>
+      <artifactId>lightblue-rest-integration-test</artifactId>
+      <version>${lightblue-rest.version}</version>
     </dependency>
   
     <!-- Maven Plugin Dependencies -->

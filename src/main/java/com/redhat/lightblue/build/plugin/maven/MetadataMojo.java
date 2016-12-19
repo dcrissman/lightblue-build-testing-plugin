@@ -15,7 +15,7 @@ import com.redhat.lightblue.client.LightblueException;
 import com.redhat.lightblue.client.http.LightblueHttpClient;
 
 @Mojo(name = "metadata", defaultPhase = LifecyclePhase.GENERATE_TEST_RESOURCES)
-public class MetadataPluginMojo extends AbstractMojo {
+public class MetadataMojo extends AbstractMojo {
 
     @Parameter(required = true)
     private Map<String, String> metadata;
