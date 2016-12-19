@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.redhat.lightblue.client.LightblueClient;
+import com.redhat.lightblue.client.LightblueClientConfiguration;
 import com.redhat.lightblue.client.LightblueException;
 import com.redhat.lightblue.client.MongoExecution;
 import com.redhat.lightblue.client.MongoExecution.ReadPreference;
@@ -30,7 +31,9 @@ public class TestServerMojo {
 
     @Before
     public void before() {
-        client = new LightblueHttpClient();
+        LightblueClientConfiguration config = new LightblueClientConfiguration();
+
+        client = new LightblueHttpClient(config);
     }
 
     @Test
