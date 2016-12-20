@@ -32,6 +32,9 @@ public class TestServerMojo {
     @Before
     public void before() {
         LightblueClientConfiguration config = new LightblueClientConfiguration();
+        config.setDataServiceURI("http://localhost:8000/rest/data");
+        config.setMetadataServiceURI("http://localhost:8000/rest/metadata");
+        config.setUseCertAuth(false);
 
         client = new LightblueHttpClient(config);
     }

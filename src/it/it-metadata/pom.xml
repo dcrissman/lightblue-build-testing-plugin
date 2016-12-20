@@ -3,9 +3,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.redhat.lightblue.plugin.maven</groupId>
+  <parent>
+    <groupId>com.redhat.lightblue.plugin.maven</groupId>
+    <artifactId>lightblue-build-plugin-test-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
   <artifactId>it-metadata-plugin</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <name>Test Metadata Plugin</name>
 
   <build>

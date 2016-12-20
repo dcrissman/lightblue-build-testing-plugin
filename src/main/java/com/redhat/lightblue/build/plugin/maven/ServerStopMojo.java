@@ -13,6 +13,7 @@ public class ServerStopMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("Stopping lightblue server");
         LightblueRestTestHarness.stopHttpServer();
     }
 

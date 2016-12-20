@@ -26,6 +26,7 @@ public class ServerStartMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("Starting lightblue server");
         try {
             new LightblueRestTestHarness() {
 

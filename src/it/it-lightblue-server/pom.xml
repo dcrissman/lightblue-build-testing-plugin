@@ -11,7 +11,6 @@
   </parent>
 
   <artifactId>it-lightblue-server-plugin</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <name>Test Lightblue Server Plugin</name>
 
   <properties>
@@ -22,10 +21,6 @@
     <dependency>
       <groupId>com.redhat.lightblue.client</groupId>
       <artifactId>lightblue-client-http</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
   
