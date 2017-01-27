@@ -48,6 +48,16 @@ public class ServerStartMojo extends AbstractMojo {
         } catch (Exception e) {
             throw new MojoExecutionException("Unable to start lightblue", e);
         }
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+
+            @Override
+            public void run() {
+                getLog().info("Stopping lightblue server");
+                LightblueRestTestHarness.stopHttpServer();
+            }
+
+        });
     }
 
 }
