@@ -16,6 +16,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.redhat.lightblue.rest.integration.LightblueRestTestHarness;
+import com.redhat.lightblue.util.JsonUtils;
 
 @Mojo(name = "server-start", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES)
 public class ServerStartMojo extends AbstractMojo {
@@ -27,7 +28,7 @@ public class ServerStartMojo extends AbstractMojo {
     private String[] metadataPaths;
 
     @Parameter(required = true)
-    private String datasource;
+    private String datasourceName;
 
     @Parameter(defaultValue = "datasources.json")
     private String datasourcesJsonPath;
@@ -60,7 +61,7 @@ public class ServerStartMojo extends AbstractMojo {
 
                 @Override
                 protected String getDatasource() {
-                    return datasource;
+                    return datasourceName;
                 }
 
                 @Override

@@ -43,7 +43,7 @@
             <id>lightblue-server-start</id>
             <goals><goal>server-start</goal></goals>
             <configuration>
-              <datasource>mongodata</datasource>
+              <datasourceName>mongodata</datasourceName>
               <metadataPaths>
                 <metadataPath>metadata/test.json</metadataPath>
               </metadataPaths>
