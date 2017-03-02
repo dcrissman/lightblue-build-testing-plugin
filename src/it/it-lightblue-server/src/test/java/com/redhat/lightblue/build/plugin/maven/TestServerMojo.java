@@ -41,23 +41,23 @@ public class TestServerMojo {
 
     @Test
     public void test() throws LightblueException {
-        DataInsertRequest insertRequest = new DataInsertRequest(com.redhat.lightblue.build.plugin.maven.Test.ENTITY_NAME);
+        DataInsertRequest insertRequest = new DataInsertRequest(TestEntity.ENTITY_NAME);
         insertRequest.returns(Projection.includeField("_id"));
         insertRequest.create(
-                new com.redhat.lightblue.build.plugin.maven.Test("fake", "created"));
-        com.redhat.lightblue.build.plugin.maven.Test created = client.data(insertRequest, com.redhat.lightblue.build.plugin.maven.Test.class);
+                new TestEntity("fake", "created"));
+        TestEntity created = client.data(insertRequest, TestEntity.class);
 
         assertNotNull(created);
         String uuid = created.get_id();
         assertNotNull(uuid);
 
-        com.redhat.lightblue.build.plugin.maven.Test found = find(client, uuid);
+        TestEntity found = find(client, uuid);
 
         assertNotNull(found);
         assertEquals("fake", found.getHostname());
         assertEquals("created", found.getValue());
 
-        DataUpdateRequest updateRequest = new DataUpdateRequest(com.redhat.lightblue.build.plugin.maven.Test.ENTITY_NAME);
+        DataUpdateRequest updateRequest = new DataUpdateRequest(TestEntity.ENTITY_NAME);
         updateRequest.where(Query.withValue("_id", Query.eq, uuid));
         updateRequest.returns(Projection.excludeFieldRecursively("*"));
         updateRequest.updates(Update.set("value", "updated"));
@@ -69,7 +69,7 @@ public class TestServerMojo {
         assertEquals("fake", found.getHostname());
         assertEquals("updated", found.getValue());
 
-        DataDeleteRequest deleteRequest = new DataDeleteRequest(com.redhat.lightblue.build.plugin.maven.Test.ENTITY_NAME);
+        DataDeleteRequest deleteRequest = new DataDeleteRequest(TestEntity.ENTITY_NAME);
         deleteRequest.where(
                 Query.or(
                         Query.withValue("_id", Query.eq, uuid),
@@ -86,12 +86,12 @@ public class TestServerMojo {
         assertNull(find(client, uuid));
     }
 
-    private com.redhat.lightblue.build.plugin.maven.Test find(LightblueClient client, String uuid) throws LightblueException {
-        DataFindRequest findRequest = new DataFindRequest(com.redhat.lightblue.build.plugin.maven.Test.ENTITY_NAME);
+    private TestEntity find(LightblueClient client, String uuid) throws LightblueException {
+        DataFindRequest findRequest = new DataFindRequest(TestEntity.ENTITY_NAME);
         findRequest.select(Projection.includeFieldRecursively("*"));
         findRequest.where(Query.withValue("_id", Query.eq, uuid));
         findRequest.execution(MongoExecution.withReadPreference(ReadPreference.primary));
-        return client.data(findRequest, com.redhat.lightblue.build.plugin.maven.Test.class);
+        return client.data(findRequest, TestEntity.class);
     }
 
 }

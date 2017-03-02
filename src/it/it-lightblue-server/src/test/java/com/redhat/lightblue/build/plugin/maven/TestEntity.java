@@ -2,7 +2,7 @@ package com.redhat.lightblue.build.plugin.maven;
 
 import java.util.Date;
 
-public class Test {
+public class TestEntity {
 
     public final static String ENTITY_NAME = "test";
 
@@ -11,10 +11,10 @@ public class Test {
     private String value;
     private Date creationDate;
 
-    public Test() {
+    public TestEntity() {
     }
 
-    public Test(String hostname, String value) {
+    public TestEntity(String hostname, String value) {
         this.hostname = hostname;
         this.value = value;
     }
