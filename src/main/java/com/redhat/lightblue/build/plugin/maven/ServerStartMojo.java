@@ -2,8 +2,8 @@ package com.redhat.lightblue.build.plugin.maven;
 
 import static com.redhat.lightblue.util.JsonUtils.json;
 import static com.redhat.lightblue.util.test.AbstractJsonNodeTest.loadJsonNode;
-import static com.redhat.lightblue.util.test.AbstractJsonNodeTest.loadResource;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -16,7 +16,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.redhat.lightblue.rest.integration.LightblueRestTestHarness;
-import com.redhat.lightblue.util.JsonUtils;
 
 @Mojo(name = "server-start", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES)
 public class ServerStartMojo extends AbstractMojo {
@@ -51,7 +50,7 @@ public class ServerStartMojo extends AbstractMojo {
                             .distinct()
                             .map(path -> {
                                 try {
-                                    return loadJsonNode(path);
+                                    return json(new FileInputStream(path));
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
@@ -66,17 +65,17 @@ public class ServerStartMojo extends AbstractMojo {
 
                 @Override
                 protected JsonNode getLightblueCrudJson() throws Exception {
-                    return loadJsonNode(crudJsonPath);
+                    return json(new FileInputStream(crudJsonPath));
                 }
 
                 @Override
                 protected JsonNode getLightblueMetadataJson() throws Exception {
-                    return loadJsonNode(metadataJsonPath);
+                    return json(new FileInputStream(metadataJsonPath));
                 }
 
                 @Override
                 protected JsonNode getDatasourcesJson() throws Exception {
-                    return loadJsonNode(datasourcesJsonPath);
+                    return json(new FileInputStream(datasourcesJsonPath));
                 }
 
             };
