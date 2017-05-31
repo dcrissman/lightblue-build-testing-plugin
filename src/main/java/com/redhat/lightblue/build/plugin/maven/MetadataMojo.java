@@ -23,6 +23,9 @@ public class MetadataMojo extends AbstractMojo {
     @Parameter(readonly = true, defaultValue = "${project.build.directory}")
     private String metadataDirectory;
 
+    @Parameter(required = true)
+    private String configFilePath;
+
     public Map<String, String> getMetadata() {
         return metadata;
     }
@@ -42,7 +45,7 @@ public class MetadataMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            new MetadataPlugin(new LightblueHttpClient(), getMetadata(), getMetadataDirectory()).run();
+            new MetadataPlugin(new LightblueHttpClient(configFilePath), getMetadata(), getMetadataDirectory()).run();
         } catch (LightblueException | IOException e) {
             throw new MojoExecutionException("Unable to download metadata from lightblue", e);
         }
