@@ -1,7 +1,6 @@
 package com.redhat.lightblue.build.plugin.maven;
 
 import static com.redhat.lightblue.util.JsonUtils.json;
-import static com.redhat.lightblue.util.test.AbstractJsonNodeTest.loadJsonNode;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,6 +14,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.redhat.lightblue.mongo.test.LightblueMongoTestHarness;
+import com.redhat.lightblue.mongo.test.MongoServerExternalResource;
 import com.redhat.lightblue.rest.integration.LightblueRestTestHarness;
 
 @Mojo(name = "server-start", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES)
@@ -42,6 +43,10 @@ public class ServerStartMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Starting lightblue server");
         try {
+            Hack hack = new Hack();
+            hack.before();
+            LightblueMongoTestHarness.mongoServer = hack;
+            LightblueMongoTestHarness.prepareMongoDatasources();
             new LightblueRestTestHarness(httpServerPort) {
 
                 @Override
@@ -50,6 +55,7 @@ public class ServerStartMojo extends AbstractMojo {
                             .distinct()
                             .map(path -> {
                                 try {
+                                    getLog().info("Loading Metadata: " + path);
                                     return json(new FileInputStream(path));
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
@@ -60,21 +66,25 @@ public class ServerStartMojo extends AbstractMojo {
 
                 @Override
                 protected String getDatasource() {
+                    getLog().info("Datasource Name: " + datasourceName);
                     return datasourceName;
                 }
 
                 @Override
                 protected JsonNode getLightblueCrudJson() throws Exception {
+                    getLog().info("Loading CRUD Config: " + crudJsonPath);
                     return json(new FileInputStream(crudJsonPath));
                 }
 
                 @Override
                 protected JsonNode getLightblueMetadataJson() throws Exception {
+                    getLog().info("Loading Metadata Config: " + metadataJsonPath);
                     return json(new FileInputStream(metadataJsonPath));
                 }
 
                 @Override
                 protected JsonNode getDatasourcesJson() throws Exception {
+                    getLog().info("Loading Datasources Config: " + datasourcesJsonPath);
                     return json(new FileInputStream(datasourcesJsonPath));
                 }
 
@@ -92,6 +102,18 @@ public class ServerStartMojo extends AbstractMojo {
             }
 
         });
+    }
+
+    static class Hack extends MongoServerExternalResource {
+        @Override
+        public void before() throws IOException {
+            super.before();
+        }
+
+        @Override
+        public void after() {
+            super.after();
+        }
     }
 
 }
