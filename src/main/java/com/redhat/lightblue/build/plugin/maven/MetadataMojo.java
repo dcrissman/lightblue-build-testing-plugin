@@ -47,6 +47,7 @@ public class MetadataMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
+            getLog().info("Metadata Output Directory: " + getMetadataDirectory());
             new MetadataPlugin(
                     new LightblueHttpClient(
                             PropertiesLightblueClientConfiguration.fromInputStream(new FileInputStream(configFilePath))),

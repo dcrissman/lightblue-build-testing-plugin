@@ -43,7 +43,7 @@ public class MetadataPlugin {
             LightblueMetadataResponse response = lightblueClient.metadata(
                     new MetadataGetEntityMetadataRequest(entityName, entityVersion));
 
-            try (FileWriter writer = new FileWriter(metadataDirectory + entityName + ".json")) {
+            try (FileWriter writer = new FileWriter(metadataDirectory + "/" + entityName + ".json")) {
                 writer.write(response.getText());
             }
         }
