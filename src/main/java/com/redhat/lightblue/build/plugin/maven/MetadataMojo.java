@@ -1,5 +1,6 @@
 package com.redhat.lightblue.build.plugin.maven;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import com.redhat.lightblue.build.plugin.MetadataPlugin;
 import com.redhat.lightblue.client.LightblueException;
+import com.redhat.lightblue.client.PropertiesLightblueClientConfiguration;
 import com.redhat.lightblue.client.http.LightblueHttpClient;
 
 @Mojo(name = "metadata", defaultPhase = LifecyclePhase.GENERATE_TEST_RESOURCES)
@@ -45,7 +47,10 @@ public class MetadataMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            new MetadataPlugin(new LightblueHttpClient(configFilePath), getMetadata(), getMetadataDirectory()).run();
+            new MetadataPlugin(
+                    new LightblueHttpClient(
+                            PropertiesLightblueClientConfiguration.fromInputStream(new FileInputStream(configFilePath))),
+                    getMetadata(), getMetadataDirectory()).run();
         } catch (LightblueException | IOException e) {
             throw new MojoExecutionException("Unable to download metadata from lightblue", e);
         }
