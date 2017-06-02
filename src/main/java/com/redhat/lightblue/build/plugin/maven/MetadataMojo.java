@@ -22,7 +22,7 @@ public class MetadataMojo extends AbstractMojo {
     @Parameter(required = true)
     private Map<String, String> metadata;
 
-    @Parameter(readonly = true, defaultValue = "${project.build.directory}")
+    @Parameter(defaultValue = "${project.build.directory}/test-classes")
     private String metadataDirectory;
 
     @Parameter(required = true)
